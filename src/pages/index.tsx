@@ -7,13 +7,17 @@ import * as S from "./styles";
 
 export default function Home() {
   const [task, setTask] = useState("");
-  const [selectedTasks, setSelectedTasks] = useState<string[]>([]);
   const [todoList, setTodoList] = useState<string[]>([]);
+  const [selectedTasks, setSelectedTasks] = useState<{
+    [key: string]: boolean;
+  }>({});
 
+  // Salva os dados no localStorage sempre que houver alterações na todoList
   useEffect(() => {
     localStorage.setItem("todoList", JSON.stringify(todoList));
   }, [todoList]);
 
+  // Carrega os dados do localStorage quando o componente for montado
   useEffect(() => {
     const storedTodoList = localStorage.getItem("todoList");
     if (storedTodoList) {
@@ -29,12 +33,15 @@ export default function Home() {
   }
 
   function handleSelectTask(todo: string) {
-    if (selectedTasks.includes(todo)) {
-      setSelectedTasks(selectedTasks.filter((item) => item !== todo));
-    } else {
-      setSelectedTasks([...selectedTasks, todo]);
-    }
+    setSelectedTasks((prevSelectedTasks) => {
+      const isTaskSelected = prevSelectedTasks[todo];
+      return {
+        ...prevSelectedTasks,
+        [todo]: !isTaskSelected,
+      };
+    });
   }
+
   return (
     <S.Container>
       <form
@@ -48,23 +55,21 @@ export default function Home() {
         <Input
           type="text"
           value={task}
-          placeholder="Insira a tarefa"
+          placeholder="Insert the task"
           onChange={(event) => setTask(event.target.value)}
         />
-        <Button type="submit">Adicionar</Button>
+        <Button type="submit">To add</Button>
       </form>
       <S.ListContainer>
         {todoList.map((todo) => (
           <Label
-            key={todo}
+            key={todo.length}
             style={{
-              textDecoration: selectedTasks.includes(todo)
-                ? "line-through"
-                : "",
+              textDecoration: selectedTasks[todo] ? "line-through" : "",
             }}
           >
             <Radio
-              checked={selectedTasks.includes(todo)}
+              checked={selectedTasks[todo]}
               onChange={() => handleSelectTask(todo)}
             />
             {todo}
