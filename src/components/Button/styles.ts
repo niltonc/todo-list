@@ -1,12 +1,13 @@
 import styled from "styled-components";
+import theme from "styles/theme";
 
 export const Button = styled.button`
   align-items: center;
-  background-color: #9165bf;
-  border: 2px solid #111;
+  background-color: ${theme.colors.purple_100};
+  border: 2px solid ${theme.colors.black};
   border-radius: 8px;
   box-sizing: border-box;
-  color: #111;
+  color: ${theme.colors.black};
   cursor: pointer;
   display: flex;
   font-size: 16px;
@@ -23,7 +24,7 @@ export const Button = styled.button`
   -webkit-user-select: none;
   touch-action: manipulation;
   &:after {
-    background-color: #111;
+    background-color: ${theme.colors.black};
     border-radius: 8px;
     content: "";
     display: block;
@@ -40,7 +41,7 @@ export const Button = styled.button`
     transform: translate(0, 0);
   }
   &:active {
-    background-color: #9165bf;
+    background-color: ${theme.colors.purple_300};
     outline: 0;
   }
   &:hover {

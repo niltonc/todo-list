@@ -1,13 +1,10 @@
 import styled from "styled-components";
+import theme from "styles/theme";
 
-type LabelProps = {
-  selected?: string;
-};
-
-export const Label = styled.label<LabelProps>`
-  color: #111;
+export const Label = styled.label`
+  color: ${theme.colors.black};
   font-size: 16px;
-  margin-top: 10px;
-  line-height: 24px;
   text-decoration: none;
+  display: flex;
+  margin-top: 10px;
 `;

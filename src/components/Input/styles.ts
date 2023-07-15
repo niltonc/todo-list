@@ -1,10 +1,11 @@
 import styled from "styled-components";
+import theme from "styles/theme";
 
 export const Input = styled.input`
-  border: 2px solid #111;
+  border: 2px solid ${theme.colors.black};
   border-radius: 8px;
   box-sizing: border-box;
-  color: #111;
+  color: ${theme.colors.black};
   font-size: 16px;
   height: 48px;
   line-height: 24px;
