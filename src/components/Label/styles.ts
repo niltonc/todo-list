@@ -5,6 +5,9 @@ type LabelProps = {
 };
 
 export const Label = styled.label<LabelProps>`
+  color: #111;
+  font-size: 16px;
   margin-top: 10px;
-  text-decoration: ${({ selected }) => (selected ? "line-through" : "")};
+  line-height: 24px;
+  text-decoration: none;
 `;
